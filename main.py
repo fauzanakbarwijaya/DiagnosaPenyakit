@@ -1,7 +1,7 @@
 import os
 import datetime
 import pandas as pd
-from dataset.dataRumahSakit98 import dataDokter, gejalaUmum, gejalaGigi
+from medical_data.dataRumahSakit98 import dataDokter, gejalaUmum, gejalaGigi
 from functions.function import proses_diagnosa
 
 # Data untuk history konsultasi
