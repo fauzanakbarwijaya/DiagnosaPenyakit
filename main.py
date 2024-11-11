@@ -12,9 +12,9 @@ df_dokter = pd.DataFrame(dataDokter)
 print('\t\t SELAMAT DATANG DI RUMAH SAKIT 98')
 print('='*70)
 
-# Attandance Doctor Fiture
+# Auth Doctor Fiture
 while True:
-    # Attandance Doctor Feature
+    # Auth Doctor Feature
     id_dr = int(input("Silahkan Masukkan ID Dokter Anda : "))
     dokter = df_dokter[df_dokter['id_dr'] == id_dr] # Cari dokter berdasarkan ID
     if dokter.empty:

@@ -16,3 +16,4 @@ def proses_diagnosa(gejala_pasien, dataset_gejala):
             persentase_kemungkinan = persentase
 
     return penyakit_kemungkinan, persentase_kemungkinan
+
