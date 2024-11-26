@@ -27,7 +27,7 @@ if page == "Landing Page":
     st.write("Selamat datang di Klinik Bidan Ani!")
     st.write("Silakan gunakan menu navigasi di samping untuk masuk ke halaman yang diinginkan.")
 elif page == "Login Dokter":
-    from theApp.auth import auth_page
+    from theApp.login import auth_page
     auth_page()
 elif page == "Dashboard":
     st.write(f"Selamat datang, {st.session_state.get('dokter', {}).get('nama', 'Dokter')}!")
