@@ -1,16 +1,18 @@
 import streamlit as st
 
-# Konfigurasi awal aplikasi
+#
 st.set_page_config(page_title="Klinik Bidan Ani", page_icon="🏥")
 
-# Judul utama
 st.title("Sistem Konsultasi Klinik Bidan Ani")
-st.sidebar.title("Navigasi")
+st.image("theApp/images/cover.png", caption="14230, Jl. Alur Laut I No.9 2, RT.2/RW.3, Rawabadak Sel., Kec : koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14230")
 
-# Cek apakah user sudah login
 is_logged_in = st.session_state.get("is_logged_in", False)
 
-# Pilihan navigasi berdasarkan status login
+if not is_logged_in:
+    st.sidebar.title("Navigasi")
+else:
+    st.sidebar.title(st.session_state.get('dokter', {}).get('nama', 'Dokter'))
+
 if not is_logged_in:
     page = st.sidebar.radio(
         "Pilih Halaman",
@@ -19,7 +21,7 @@ if not is_logged_in:
 else:
     page = st.sidebar.radio(
         "Pilih Halaman",
-        ["Dashboard", "Diagnosa", "Lihat Gejala", "Riwayat Konsultasi"]
+        ["Diagnosa", "Lihat Gejala", "Riwayat Konsultasi"]
     )
 
 # Konten setiap halaman
