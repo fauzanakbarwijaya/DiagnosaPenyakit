@@ -49,9 +49,15 @@ dataDokter = df_dokter.to_dict(orient="records")
 # Load gejala umum
 df_gejala_umum = pd.read_excel(file_path, sheet_name="GejalaUmum")
 gejalaUmum = {
-    row['penyakit']: {'gejala': row['gejala'].split(',')}
+    row['penyakit']: {
+        'gejala': row['gejala'].split(','),
+        'gejalaFisik': row['gejalaFisik'].split(',') if pd.notna(row['gejalaFisik']) else [],
+        'faktorPendukung': row['faktorPendukung'].split(',') if pd.notna(row['faktorPendukung']) else [],
+        'resepObat': row['resepObat'].split(',') if pd.notna(row['resepObat']) else []
+    }
     for _, row in df_gejala_umum.iterrows()
 }
+
 
 # Load gejala gigi
 df_gejala_gigi = pd.read_excel(file_path, sheet_name="GejalaGigi")

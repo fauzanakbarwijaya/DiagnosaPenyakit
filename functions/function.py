@@ -20,22 +20,34 @@ def auth_dokter(df_dokter):
             poli_dokter = dokter.iloc[0]['poli']
             return nama_dokter, poli_dokter
         
-def proses_diagnosa(gejala_pasien, dataset_gejala):
+def proses_diagnosa(gejala_pasien, gejala_fisik_pasien, faktor_pendukung_pasien, dataset_gejala):
     penyakit_kemungkinan = "Tidak Diketahui"
     persentase_kemungkinan = 0
+    resep_obat = []
 
     # Loop untuk mencocokkan gejala dengan dataset_gejala
     for penyakit, data in dataset_gejala.items():
         gejala_terkait = data["gejala"]
-        match_count = len(set(gejala_pasien) & set(gejala_terkait))
-        total_gejala = len(gejala_terkait)
-        persentase = (match_count / total_gejala) * 100
+        gejala_fisik_terkait = data.get("gejalaFisik", [])
+        faktor_pendukung_terkait = data.get("faktorPendukung", [])
 
+        # Hitung kecocokan gejala
+        match_count_gejala = len(set(gejala_pasien) & set(gejala_terkait))
+        match_count_fisik = len(set(gejala_fisik_pasien) & set(gejala_fisik_terkait))
+        match_count_faktor = len(set(faktor_pendukung_pasien) & set(faktor_pendukung_terkait))
+        total_gejala = len(gejala_terkait) + len(gejala_fisik_terkait) + len(faktor_pendukung_terkait)
+
+        # Hitung persentase kecocokan
+        persentase = ((match_count_gejala + match_count_fisik + match_count_faktor) / total_gejala) * 100
+
+        # Update kemungkinan penyakit jika persentase lebih tinggi
         if persentase > persentase_kemungkinan:
             penyakit_kemungkinan = penyakit
             persentase_kemungkinan = persentase
+            resep_obat = data.get("resepObat", [])
 
-    return penyakit_kemungkinan, persentase_kemungkinan
+    return penyakit_kemungkinan, persentase_kemungkinan, resep_obat
+
 
 def simpan_history_excel(history_konsultasi, filename="history_konsultasi.xlsx"):
     # Cek apakah file sudah ada
