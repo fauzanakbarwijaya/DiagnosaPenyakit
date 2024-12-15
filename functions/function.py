@@ -37,6 +37,7 @@ def proses_diagnosa(gejala_pasien, gejala_fisik_pasien, faktor_pendukung_pasien,
         match_count_faktor = len(set(faktor_pendukung_pasien) & set(faktor_pendukung_terkait))
         total_gejala = len(gejala_terkait) + len(gejala_fisik_terkait) + len(faktor_pendukung_terkait)
 
+
         # Hitung persentase kecocokan
         persentase = ((match_count_gejala + match_count_fisik + match_count_faktor) / total_gejala) * 100
 
