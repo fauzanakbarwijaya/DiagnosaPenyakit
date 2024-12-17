@@ -31,21 +31,31 @@ def proses_diagnosa(gejala_pasien, gejala_fisik_pasien, faktor_pendukung_pasien,
         gejala_fisik_terkait = data.get("gejalaFisik", [])
         faktor_pendukung_terkait = data.get("faktorPendukung", [])
 
-        # Hitung kecocokan gejala
-        match_count_gejala = len(set(gejala_pasien) & set(gejala_terkait))
-        match_count_fisik = len(set(gejala_fisik_pasien) & set(gejala_fisik_terkait))
-        match_count_faktor = len(set(faktor_pendukung_pasien) & set(faktor_pendukung_terkait))
-        total_gejala = len(gejala_terkait) + len(gejala_fisik_terkait) + len(faktor_pendukung_terkait)
+        # Memastikan hanya gejala yang ada dalam dataset yang dihitung
+        valid_gejala_pasien = [gejala for gejala in gejala_pasien if gejala in gejala_terkait]
+        valid_gejala_fisik_pasien = [gejala for gejala in gejala_fisik_pasien if gejala in gejala_fisik_terkait]
+        valid_faktor_pendukung_pasien = [faktor for faktor in faktor_pendukung_pasien if faktor in faktor_pendukung_terkait]
 
+        # Hitung kecocokan untuk gejala yang ada
+        match_count_gejala = len(valid_gejala_pasien)
+        match_count_fisik = len(valid_gejala_fisik_pasien)
+        match_count_faktor = len(valid_faktor_pendukung_pasien)
+
+        # Total gejala yang benar
+        total_gejala_benar = match_count_gejala + match_count_fisik + match_count_faktor
+
+        # Total inputan gejala pasien (baik yang benar maupun salah)
+        total_inputan_gejala = len(gejala_pasien) + len(gejala_fisik_pasien) + len(faktor_pendukung_pasien)
 
         # Hitung persentase kecocokan
-        persentase = ((match_count_gejala + match_count_fisik + match_count_faktor) / total_gejala) * 100
+        persentase = (total_gejala_benar / total_inputan_gejala) * 100
 
         # Update kemungkinan penyakit jika persentase lebih tinggi
         if persentase > persentase_kemungkinan:
             penyakit_kemungkinan = penyakit
             persentase_kemungkinan = persentase
             resep_obat = data.get("resepObat", [])
+
 
     return penyakit_kemungkinan, persentase_kemungkinan, resep_obat
 
