@@ -45,6 +45,8 @@ def diagnosa_page():
                 "tanggal_konsultasi": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             })
 
+            simpan_history_excel(history_konsultasi)
+
             # Tampilkan hasil diagnosa
             st.subheader("Hasil Diagnosa")
             st.write(f"**Nama Pasien**: {nama_pasien}")

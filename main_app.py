@@ -1,10 +1,80 @@
 import streamlit as st
-
-#
 st.set_page_config(page_title="Klinik Bidan Ani", page_icon="🏥")
 
+# Custom CSS
+st.markdown(
+    """
+    <style>
+    /* Mengatur warna latar belakang aplikasi */
+    .stApp {
+        background-color: white;
+        color: black;
+    }
+
+    .stAppHeader {
+        background-color: white !important; /* Ubah background header ke putih */
+        color: black !important; /* Ubah warna teks header ke hitam */
+        border-bottom: 1px solid #ddd; /* Tambahkan garis bawah opsional */
+    }
+
+    /* Sidebar styling */
+    [data-testid="stSidebar"] {
+        background-color: #217D8F;
+    }
+    
+    /* Sidebar text color */
+    [data-testid="stSidebar"] * {
+        color: white;
+    }
+
+    .st-ae.st-c8.st-cu.st-bf.st-bg.st-bt.st-bu.st-bv.st-bw.st-bx.st-by.st-bs.st-cq input {
+        background-color: #F9F9F9; /* Warna background lebih terang */
+        border: 1px solid #D3D3D3; /* Warna border */
+        color: black !important; /* Warna teks */
+        padding: 10px; /* Padding dalam field */
+        border-radius: 5px; /* Membuat sudut field membulat */
+    }
+
+    .st-emotion-cache-1n47svx {
+        background-color: #217D8F; /* Warna tombol */
+        color: #FFFFFF; /* Warna teks pada tombol */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .st-emotion-cache-1n47svx:hover{
+        background-color: blue;
+        color: white;
+    }
+
+    .st-emotion-cache-ysk9xe>p{
+        color: black;
+    }
+
+    .st-emotion-cache-3lmqu2{
+        color: black;
+    }
+
+    .st-emotion-cache-1y5f4eg>p{
+        color: gray;
+    }
+
+    [data-testid="stImageCaption"]{
+        color: black;
+    }
+    
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
+
 st.title("Sistem Konsultasi Klinik Bidan Ani")
-st.image("theApp/images/cover.png", caption="14230, Jl. Alur Laut I No.9 2, RT.2/RW.3, Rawabadak Sel., Kec : koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14230")
+st.image("theApp/images/cover.png", caption="14230, Jl. Alur Laut I No.9 2, RT.2/RW.3, Rawabadak Sel., Kec : Koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14230")
 
 is_logged_in = st.session_state.get("is_logged_in", False)
 
